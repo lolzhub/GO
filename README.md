@@ -19,18 +19,78 @@ Bodvar is a simple Go bot implemented in Python, designed to play the ancient bo
 - Python 3.x
 - Sabaki GUI
 
+## How to Download and Install Sabaki
+
+Sabaki is a popular open-source Go board GUI that provides a user-friendly interface for playing Go and analyzing games. Follow these steps to download and install Sabaki on your computer:
+
+### For Windows:
+
+1. **Download:**
+   - Visit the [Sabaki Releases](https://github.com/SabakiHQ/Sabaki/releases) page on GitHub.
+   - Scroll down to the latest release section.
+   - Download the `.exe` installer file for the latest version. (e.g., `sabaki-setup-0.53.1.exe`)
+
+2. **Install:**
+   - Once the download is complete, double-click the installer file to start the installation process.
+   - Follow the on-screen instructions to complete the installation.
+   - Sabaki will be installed on your system and ready to use.
+
+### For macOS:
+
+1. **Download:**
+   - Visit the [Sabaki Releases](https://github.com/SabakiHQ/Sabaki/releases) page on GitHub.
+   - Scroll down to the latest release section.
+   - Download the `.dmg` disk image file for the latest version. (e.g., `Sabaki-0.53.1.dmg`)
+
+2. **Install:**
+   - Open the downloaded `.dmg` file.
+   - Drag the Sabaki application icon to the Applications folder to install it.
+   - Sabaki will be installed on your Mac and ready to use.
+
+### For Linux:
+
+1. **Download:**
+   - Visit the [Sabaki Releases](https://github.com/SabakiHQ/Sabaki/releases) page on GitHub.
+   - Scroll down to the latest release section.
+   - Download the `.AppImage` file for the latest version. (e.g., `sabaki-0.53.1-x86_64.AppImage`)
+
+2. **Make Executable:**
+   - Open a terminal window.
+   - Navigate to the directory where you downloaded the `.AppImage` file.
+   - Run the following command to make the file executable:
+     ```bash
+     chmod +x sabaki-0.53.1-x86_64.AppImage
+     ```
+
+3. **Run Sabaki:**
+   - Double-click the `.AppImage` file to start Sabaki.
+   - Alternatively, you can run Sabaki from the terminal:
+     ```bash
+     ./sabaki-0.53.1-x86_64.AppImage
+     ```
+
+### Additional Information:
+
+- **Dependencies:**
+  - Sabaki does not require any additional dependencies to run on Windows, macOS, or most Linux distributions.
+- **System Requirements:**
+  - Sabaki should run on most modern computers without issue.
+- **Contribution:**
+  - Sabaki is an open-source project, and contributions are welcome. Visit the [Sabaki GitHub repository](https://github.com/SabakiHQ/Sabaki) to learn more.
+
+
 ## Installation and Setup
 
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/your-username/bodvar-go-bot.git
+    git clone https://github.com/lolzhub/GO.git
     ```
 
 2. Navigate to the cloned directory:
 
     ```bash
-    cd bodvar-go-bot
+    cd GO
     ```
 
 3. Ensure you have Python installed on your system.
