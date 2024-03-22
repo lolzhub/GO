@@ -166,6 +166,8 @@ Contributions are welcome! If you have any improvements or suggestions, feel fre
 ## Inspiration Tutorials/Article
 
 [Article](https://archive.org/details/byte-magazine-1981-04/page/n101/mode/2up)
+
+
 [maksimKorzh's Youtube Playlist](https://www.youtube.com/watch?v=dHlan0bgr5U&list=PLmN0neTso3JzVlIQC3fwnP1qgIKp1x97X)
 
 ## License
