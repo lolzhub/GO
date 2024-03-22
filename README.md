@@ -1,4 +1,4 @@
-# Bodvar - Go Bot for Sabaki GUI
+# Bodvar - the go to GO bot!
 
 Bodvar is a simple Go bot implemented in Python, designed to play the ancient board game of Go. It's specifically developed to interface with the Sabaki GUI, providing a playable opponent for Go enthusiasts. This bot utilizes a combination of random moves and simple strategies to play the game.
 
