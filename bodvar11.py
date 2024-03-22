@@ -15,19 +15,21 @@ Piece encoding:
 
 """
 
+from __future__ import print_function
+def eprint(*args, **kwargs): print(*args, file=sys.stderr, **kwargs)
+
 import sys
 import random
 
 VERSION = '1.0'
 
-
 # 9x9 GO ban
 board_9x9 = [
     7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
     7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
-    7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
-    7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
-    7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+    7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 7,
+    7, 0, 0, 1, 2, 0, 0, 0, 0, 0, 7,
+    7, 0, 0, 2, 1, 2, 0, 0, 0, 0, 7,
     7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
     7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
     7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
@@ -204,7 +206,7 @@ def print_board():
         print()
     
     # print notation
-    print(' ' + files[0:BOARD_RANGE*2] + '\n')
+    print(('' if len(board) == 121 else ' ') + files[0:BOARD_RANGE*2] + '\n')
 
 # set Go ban size
 def set_board_size(command):
@@ -333,6 +335,9 @@ def make_random_move(color):
 def play(command):
     # parse color
     color = BLACK if command.split()[1] == 'B' else WHITE
+
+    # handle GUI pass move
+    if command.split()[-1] == 'pass': return
     
     # parse square
     square_str = command.split()[-1]
@@ -365,6 +370,152 @@ def captures(color):
             # restore the board
             restore_board()
 
+# edge detection
+def detect_edge(square):
+    # loop over 4 directions
+    for direction in [BOARD_RANGE, 1, -BOARD_RANGE, -1]:
+        # indeed, it's the board edge
+        if board[square + direction] == OFFBOARD: return 1
+    
+    # not, it's not the board edge
+    return 0
+
+# find best liberty to extend/surround
+def evaluate(color):
+    # max number of liberties found
+    best_count = 0
+    best_liberty = liberties[0]
+    
+    # loop over the liberties within the list
+    for liberty in liberties:
+        # put stone on board
+        board[liberty] = color
+        
+        # count new liberties
+        count(liberty, color)
+        
+        # found more liberties
+        if len(liberties) > best_count and not detect_edge(liberty):
+            best_liberty = liberty
+            best_count = len(liberties)
+            
+        # restore board
+        restore_board()
+        
+        # remove stone off board
+        board[liberty] = EMPTY
+    
+    # return best liberty
+    return best_liberty
+
+# generate move
+def genmove(color):
+    #######################################################################
+    #
+    #    AI logic (first defense, then attack)
+    #
+    # 1. If opponent's group have only one liberty left
+    #    then capture it
+    #
+    # 2. If the group of the side to move has only one liberty
+    #    then save it by putting a stone there unless it's a board edge
+    #
+    # 3. If the group of the side to move has two liberties
+    #    then choose the the one resulting in more liberties
+    #
+    # 4. If opponent's group have more than one liberty
+    #    then try to surround it
+    #
+    # 5. Match patterns to build strong shape, if found any
+    #    consider that instead of chasing the group
+    #
+    #######################################################################
+
+    best_move = 0
+    capture = 0
+    save = 0
+    defend = 0
+    surround = 0
+    
+    '''
+    # capture opponent's group
+    for square in range(len(board)):
+        # init piece
+        piece = board[square]
+        
+        # match opponent's group
+        if piece & (3 - color):
+            # count liberties for opponent's group
+            count(square, (3 - color))
+            
+            # if only 1 liberty left
+            if len(liberties) == 1:
+                # store the capture move
+                target_square = liberties[0]
+                best_move = target_square
+                capture = target_square
+                break
+            
+            # restore board
+            restore_board()
+
+    # save own group
+    for square in range(len(board)):
+        # init piece
+        piece = board[square]
+        
+        # match own group
+        if piece & (color):
+            # count liberties for own group
+            count(square, (color))
+            
+            # if only 1 liberty left
+            if len(liberties) == 1:
+                # store the save move
+                target_square = liberties[0]
+                
+                # edge detection
+                if not detect_edge(target_square):
+                    best_move = target_square
+                    save = target_square
+                    break
+            
+            # restore board
+            restore_board()
+    '''
+    
+    # defend own group
+    for square in range(len(board)):
+        # init piece
+        piece = board[square]
+        
+        # match own group
+        if piece & (color):
+            # count liberties for own group
+            count(square, (color))
+            
+            # if group has 2 liberties
+            if len(liberties) == 2:
+                # store the save move
+                best_liberty = evaluate(color)
+                best_move = best_liberty
+                defend = best_liberty
+                break
+            
+            # restore board
+            restore_board()
+
+    
+    # found move
+    if best_move:
+        eprint('defend move')
+        set_stone(best_move, color)
+        return coords[best_move]
+
+    # if starts with black
+    eprint('random move')
+    return make_random_move(color)
+
 # GTP communcation protocol
 def gtp():
     # main GTP loop
@@ -381,7 +532,7 @@ def gtp():
         elif 'clear_board' in command: clear_board(); print('=\n')
         elif 'showboard' in command: print('= '); print_board()
         elif 'play' in command: play(command); print('=\n')
-        elif 'genmove' in command: print('=', make_random_move(BLACK if command.split()[-1] == 'B' else WHITE) + '\n')
+        elif 'genmove' in command: print('=', genmove(BLACK if command.split()[-1] == 'B' else WHITE) + '\n')
         elif 'quit' in command: sys.exit()
         else: print('=\n') # skip currently unsupported commands
 
