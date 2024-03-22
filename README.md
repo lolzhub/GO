@@ -163,6 +163,11 @@ Bodvar understands a subset of GTP (Go Text Protocol) commands for communication
 
 Contributions are welcome! If you have any improvements or suggestions, feel free to open an issue or submit a pull request.
 
+## Inspiration Tutorials/Article
+
+[Article](https://archive.org/details/byte-magazine-1981-04/page/n101/mode/2up)
+[maksimKorzh's Youtube Playlist](https://www.youtube.com/watch?v=dHlan0bgr5U&list=PLmN0neTso3JzVlIQC3fwnP1qgIKp1x97X)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
