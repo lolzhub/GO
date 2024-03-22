@@ -13,13 +13,12 @@ COPY --from=sabaki /usr/local/lib /usr/local/lib
 RUN apt-get update && apt-get install -y git
 
 # Clone your bot script from GitHub
-RUN git clone https://github.com/yourusername/yourrepository.git /app
+RUN git clone https://github.com/lolzhub/GO/.git
 
-# Install any dependencies for your bot script
-RUN pip install --no-cache-dir -r requirements.txt
+RUN mv GO/* /app
 
 # Expose any ports needed for communication with your bot
 EXPOSE 5000
 
 # Command to start Sabaki and your bot
-CMD ["sabaki", "--gtp", "your_bot_script.py", "--port", "5000"]
+CMD ["sabaki", "--gtp", "bodvar14.py", "--port", "5000"]
