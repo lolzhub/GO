@@ -4,15 +4,29 @@ Bodvar is a simple Go bot implemented in Python, designed to play the ancient bo
 
 ## Features
 
-- **Random Moves:** Bodvar can generate random moves on the Go board, providing a basic level of gameplay.
-- **Simple Strategies:** It employs basic strategies such as:
-  - Capturing opponent's stones by surrounding them.
-  - Saving its own groups of stones by creating liberties.
-  - Defending its groups to prevent capture.
-  - Surrounding opponent's groups to limit their options.
-  - Extending its own stone groups by occupying adjacent empty spaces.
-  - Pattern matching to identify strategic opportunities based on board configurations.
-- **Interface with Sabaki GUI:** Bodvar is compatible with the Sabaki GUI, allowing users to play against it within the Sabaki environment.
+### Advanced Gameplay Strategies
+Bodvar is equipped with a repertoire of advanced gameplay strategies, enabling it to engage in dynamic and strategic gameplay. These strategies include:
+
+#### 1. Stone Capture
+Bodvar possesses the ability to identify vulnerable groups of opponent's stones and execute strategic moves to capture them. By surrounding opponent's stones with its own, Bodvar effectively eliminates them from the board, gaining a tactical advantage in the game.
+
+#### 2. Stone Preservation
+Recognizing the importance of preserving its own groups of stones, Bodvar employs defensive maneuvers to ensure their safety. By creating liberties within its stone formations, Bodvar fortifies its positions and prevents them from being captured by the opponent.
+
+#### 3. Group Extension
+In addition to defense, Bodvar focuses on expanding its influence on the board by extending its own stone groups. By occupying adjacent empty spaces and strategically placing stones, Bodvar increases its territory and strengthens its position, setting the stage for future strategic maneuvers.
+
+#### 4. Strategic Analysis through Pattern Matching
+Bodvar utilizes pattern matching techniques to analyze the current board configuration and identify strategic opportunities. By recognizing recurring patterns and formations, Bodvar is able to anticipate the opponent's moves and formulate effective counter-strategies, maximizing its chances of success on the board.
+
+### Seamless Integration with Sabaki GUI
+Bodvar seamlessly integrates with the Sabaki GUI, providing users with a convenient and user-friendly platform to play the game of Go. By leveraging the features of the Sabaki interface, users can enjoy a smooth and immersive gaming experience while facing off against Bodvar in challenging matches.
+
+### Customizable Gameplay Experience
+Bodvar offers a customizable gameplay experience, allowing users to tailor the game settings according to their preferences. Whether adjusting the board size, setting the komi value, or configuring other game parameters, users have the flexibility to customize their gameplay experience to suit their individual preferences and skill levels.
+
+### Open-Source and Community-Driven Development
+Bodvar is an open-source project. Contributions, feedback, and suggestions from the community play a crucial role in the ongoing development and improvement of Bodvar.
 
 ## Requirements
 
@@ -87,7 +101,7 @@ Sabaki is a popular open-source Go board GUI that provides a user-friendly inter
     git clone https://github.com/lolzhub/GO.git
     ```
 
-2. Navigate to the cloned directory:
+2. Navigate to the cloned directory and verify `bodvar14.py` is present:
 
     ```bash
     cd GO
@@ -130,8 +144,6 @@ Sabaki is a popular open-source Go board GUI that provides a user-friendly inter
 8. **Enjoy the Game!:**
    - Have fun playing against Bodvar in Sabaki GUI!
 
-
-2. Follow the prompts from the Sabaki GUI to start and play the game against Bodvar.
 
 ## Commands
 
